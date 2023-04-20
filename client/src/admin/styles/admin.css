@@ -1,0 +1,224 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+.main-div {
+  display: flex;
+  overflow-x: scroll;
+}
+.main-div::-webkit-scrollbar {
+  display: none;
+}
+.center-div {
+  flex: 1;
+}
+.dashboard-page-title {
+  background-color: #f2edf3;
+  margin: 1rem 0rem;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+}
+.show-admin-menu {
+  display: block;
+  margin: 20px 0px;
+  padding: 0;
+  font-size: 20px;
+  list-style: none;
+  cursor: pointer;
+}
+.close-admin-menu {
+  font-size: 25px;
+  list-style: none;
+  cursor: pointer;
+  color: white;
+  text-align: center;
+}
+.admin-menu {
+  /* border-right: 1px solid #e5e5e5; */
+  /* display: flex; 
+   justify-content: center;  */
+  height: 100%;
+  width: 200px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.admin-menu ul {
+  height: 100%;
+  margin: 0;
+  background: #212121;
+  padding: 2rem 1rem;
+  height: 100%;
+}
+.admin-menu li {
+  list-style: none none inside;
+  padding: 0.5rem 1rem;
+  text-align: center;
+}
+.admin-menu li > .admin-nav-link {
+  color: white;
+  font-size: 16px;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+}
+.admin-menu li > .admin-nav-link:hover {
+  background-color: #ff0000;
+  border-radius: 5px;
+}
+.admin-products img {
+  height: 50px;
+  width: 100px;
+  object-fit: contain;
+}
+.delete-btn,
+.edit-btn {
+  cursor: pointer;
+  margin: 0rem 0.1rem;
+}
+.add-product-btn,
+.add-category-btn {
+  margin: 0.5rem 0rem;
+}
+.add-product-link,
+.add-category-link,
+.add-product-link:hover,
+.add-category-link:hover {
+  text-decoration: none;
+  color: white;
+}
+table {
+  margin-top: 1rem;
+}
+table tr td,
+th {
+  border: 1px solid #d5d5d5;
+  border-collapse: collapse;
+  text-align: center;
+}
+.update-category,
+.add-category,
+.add-product,
+.update-product,
+.update-user,
+.update-order {
+  margin: 2rem 0rem;
+  display: flex;
+  justify-content: center;
+  overflow-x: hidden;
+  width: 100%;
+}
+.update-category-form,
+.update-product-form,
+.add-category-form,
+.add-product-form,
+.update-user-form,
+.update-order-form {
+  padding: 2rem 1rem;
+  width: 100%;
+  max-width: 600px;
+}
+.update-category-form h2,
+.add-category-form h2,
+.add-product-form h2,
+.update-product-form h2,
+.update-user-form h2,
+.update-order-form h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.update-category-form input,
+.update-product-form input,
+.add-category-form input,
+.add-product-form input,
+.update-user-form input,
+.update-order-form input {
+  margin: 0.5rem 0rem;
+}
+.update-category-form button,
+.update-product-form button,
+.add-category-form button,
+.add-product-form button,
+.update-user-form button,
+.update-order-form button {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  background: #3498db;
+  color: white;
+  padding: 8px 25px;
+  font-size: 1rem;
+  border: none;
+}
+.update-category-form button:hover,
+.update-product-form button:hover,
+.add-category-form button:hover,
+.add-product-form button:hover,
+.update-user-form button:hover,
+.update-order-form button:hover {
+  color: white;
+}
+i {
+  cursor: pointer;
+}
+.admin-orders img {
+  height: 50px;
+  object-fit: contain;
+}
+.admin-search-products {
+  display: flex;
+  justify-content: center;
+}
+.admin-search-products input {
+  width: 100%;
+  max-width: 500px;
+  border: 1px solid #847777;
+  padding: 0.5rem 1rem;
+  border-radius: 30px;
+}
+/* Dashboard components css */
+.dashboard-analytics {
+  color: white;
+  margin: 1rem 0rem;
+}
+.dashboard-analytic {
+  text-align: center;
+  width: 100%;
+  padding: 20px 10px;
+  margin: 0.5rem 0.1rem;
+  border-radius: 10px;
+}
+/* last month orders */
+.last-month-orders {
+  margin: 2rem;
+}
+
+.last-month-orders h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.last-month-orders-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.last-month-order {
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  width: 300px;
+}
+
+.last-month-order h3 {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
