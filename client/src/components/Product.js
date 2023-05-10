@@ -3,7 +3,7 @@ import Rating from "./Rating";
 import { Link, useNavigate } from "react-router-dom";
 import { addProductToCart } from "../utils/utils";
 import { ProductsContext } from "../store/Store";
-const Product = ({product }) => {
+const Product = ({ product }) => {
   let navigate = useNavigate();
   let { dispatch, user } = useContext(ProductsContext);
   let { _id, title, slug, image, price, rating } = product;
@@ -25,9 +25,7 @@ const Product = ({product }) => {
           <button
             className="product-btn"
             onClick={() => {
-              user
-                ? addProductToCart(_id, dispatch)
-                : navigate("/accounts/login");
+              addProductToCart(_id, dispatch);
             }}
           >
             Add To Cart

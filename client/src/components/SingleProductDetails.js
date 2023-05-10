@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ProductsContext } from "../store/Store";
 import Loading from "./Loading";
-import { fetchSingleProduct} from "../api/api";
+import { fetchSingleProduct } from "../api/api";
 import { addProductToCart } from "../utils/utils";
 import Rating from "./Rating";
 import SimilarProducts from "./SimilarProducts";
@@ -38,21 +38,14 @@ const SingleProductDetails = () => {
                     ) : (
                       <span className="badge text-bg-dark">Out Of Stock</span>
                     )}
-                    {user ? (
-                      <button
-                        className="single-product-btn"
-                        onClick={() => {
-                          addProductToCart(singleProduct._id, dispatch);
-                        }}
-                      >
-                        Add To Cart
-                      </button>
-                    ) : (
-                      <Link className="login-btn" to={"/accounts/login"}>
-                        {" "}
-                        LogIn to Grab Product
-                      </Link>
-                    )}
+                    <button
+                      className="single-product-btn"
+                      onClick={() => {
+                        addProductToCart(singleProduct._id, dispatch);
+                      }}
+                    >
+                      Add To Cart
+                    </button>
                   </div>
                 </div>
               </div>

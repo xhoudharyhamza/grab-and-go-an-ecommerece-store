@@ -2,13 +2,11 @@ import React, { useContext } from "react";
 import StripeCheckout from "react-stripe-checkout";
 import { ProductsContext } from "../store/Store";
 import { useNavigate } from "react-router-dom";
-import dotenv from 'dotenv';
-dotenv.config();
 const PayAmount = ({ totalAmount }) => {
   let navigate = useNavigate();
   let { shippingAddress, user, cart, dispatch, loading } =
     useContext(ProductsContext);
-  let stripeKey = process.env.STRIPE_KEY;
+  let stripeKey="pk_test_51Mo2I9HwgwQZhZhCSbsfzaIvMRZBXAEdZGzFcPD73VNFIzGiAOWXCfuuJ9lB6vG1T6N0hkZ1PaCKgLJrNiMMTP7I00VuXs1BIQ"
   let tokenHandler = async (token) => {
     try {
       dispatch({ type: "DATA_LOADING", payload: { loading: true } });

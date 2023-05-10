@@ -16,7 +16,7 @@ const Navbar = () => {
   }, []);
   return (
     <nav className="nav-bar">
-      <div className="logo">SCU Store</div>
+      <div className="logo">Grab&Go</div>
       <ul className="nav-links">
         <input type="checkbox" id="checkbox_toggle" />
         <label htmlFor="checkbox_toggle" className="hamburger">
