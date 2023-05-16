@@ -1,4 +1,3 @@
-"use strict";
 const nodemailer = require("nodemailer");
 let sendAuthenticationEMail = () => {
   return nodemailer.createTransport({
@@ -9,12 +8,12 @@ let sendAuthenticationEMail = () => {
     },
   });
 };
-let mailOptions = (receiptMail,subject, url) => {
+let mailOptions = (receiptMail,subject, body) => {
   return {
-    from: "SCU Store",
+    from: "Grab&Go",
     to: receiptMail,
     subject: subject,
-    html: url,
+    html: body,
   };
 };
 module.exports = { sendAuthenticationEMail, mailOptions };

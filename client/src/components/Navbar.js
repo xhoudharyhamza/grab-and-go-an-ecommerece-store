@@ -33,7 +33,6 @@ const Navbar = () => {
               Home
             </NavLink>
           </li>
-
           <li>
             <NavLink
               className="menu-link"
@@ -43,7 +42,6 @@ const Navbar = () => {
               Products
             </NavLink>
           </li>
-
           <li className="menu-link categories">
             <a>
               Categories <i className="fa-solid fa-caret-down"></i>
@@ -75,6 +73,15 @@ const Navbar = () => {
             >
               <i className="fa-solid fa-cart-shopping"></i>
               <span className=" badge bg-secondary">{cart.length}</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              className="menu-link"
+              to="/contact"
+              style={({ isActive }) => (isActive ? activeStyle : undefined)}
+            >
+              Contact
             </NavLink>
           </li>
           {!user ? (

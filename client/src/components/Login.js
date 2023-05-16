@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { ProductsContext } from "../store/Store";
 import Error from "./Error";
-import { nullErrors } from "../utils/utils";
+import { nullErrors, loadingFalse } from "../utils/utils";
 const Login = () => {
   let navigate = useNavigate();
   let url = useLocation();
@@ -16,6 +16,7 @@ const Login = () => {
     let { email, password } = loginUser;
     dispatch({ type: "DATA_LOADING", payload: { loading: true } });
     try {
+      nullErrors(dispatch)
       let res = await fetch("/accounts/login", {
         method: "POST",
         headers: {
@@ -25,31 +26,32 @@ const Login = () => {
       });
       let response = await res.json();
       if (res.status === 200) {
-        dispatch({ type: "SET_ERROR", payload: { error: null } });
+        nullErrors(dispatch)
         dispatch({ type: "SET_USER", payload: { user: response.user } });
-        dispatch({ type: "DATA_LOADING", payload: { loading: false } });
+        loadingFalse(dispatch)
         if (url.pathname === "/checkout/accounts/login") {
           navigate("/checkout/shipping-address");
         } else {
           navigate("/products");
         }
       } else {
-        dispatch({ type: "DATA_LOADING", payload: { loading: false } });
+        loadingFalse(dispatch)
         dispatch({ type: "SET_ERROR", payload: { error: response.error } });
       }
     } catch (error) {
-      dispatch({ type: "DATA_LOADING", payload: { loading: false } });
+      loadingFalse(dispatch)
       dispatch({ type: "SET_ERROR", payload: { error } });
     }
   };
   useEffect(() => {
     nullErrors(dispatch)
+    loadingFalse(dispatch)
   }, []);
   return (
     <div className="container">
       <div className="login-user">
         <div className="login-user-form">
-          <h1>Login</h1>
+          <h2>Login</h2>
           {error && <Error />}
           <form onSubmit={submitLoginForm}>
             <div className="form-group">
@@ -87,10 +89,11 @@ const Login = () => {
               {loading
                 ? "Processing..."
                 : user
-                ? "Already Logged In"
-                : "Login Here"}
+                  ? "Already Logged In"
+                  : "Login Here"}
             </button>
           </form>
+          <Link to={"/accounts/forgotpassword"} className="forgot-password-btn">Forgot Password?</Link>
           <p>New To Here?</p>
           <Link className="signup-user-btn" to={"/accounts/signup"}>
             SignUp Here

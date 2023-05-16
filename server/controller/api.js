@@ -223,15 +223,23 @@ let registerNewUsers = async (req, res) => {
       if (token) {
         let transporter = sendAuthenticationEMail();
         let subject = "Email Verification";
-        let url = `<p>Click to the following link and verify you Email <a href='http://localhost:3000/accounts/verification/${token}'>http://localhost:3000/accounts/verification/${token}</a></p>`;
-        let options = mailOptions(email, subject, url);
+        let body = `<p>Click to the following link and verify you Email <a href='http://localhost:3000/accounts/verification/${token}'>http://localhost:3000/accounts/verification/${token}</a></p>`;
+        let options = mailOptions(email, subject, body);
         let sendEmail = await transporter.sendMail(options);
-        if (!sendEmail) {
+        if (!sendEmail.messageId) {
           res.status(404).json({
             error: "Error in sending verification Email. Try again",
           });
         } else {
-          let user = await new User({ fname, lname, email, password, token });
+          let otp = Math.floor(Math.random() * 9000) + 1000;
+          let user = await new User({
+            fname,
+            lname,
+            email,
+            password,
+            token,
+            otp,
+          });
           user.password = await bcrypt.hash(user.password, 10);
           await user.save();
           res.status(200).json({
@@ -281,10 +289,10 @@ let loginUsers = async (req, res) => {
           let token = unique.token;
           let transporter = sendAuthenticationEMail();
           let subject = "Email Verification";
-          let url = `<p>Click to the following link and verify you Email <a href='http://localhost:3000/accounts/verification/${token}'>http://localhost:3000/accounts/verification/${token}</a></p>`;
-          let options = mailOptions(email, subject, url);
+          let body = `<p>Click to the following link and verify you Email <a href='http://localhost:3000/accounts/verification/${token}'>http://localhost:3000/accounts/verification/${token}</a></p>`;
+          let options = mailOptions(email, subject, body);
           let sendEmail = await transporter.sendMail(options);
-          if (sendEmail) {
+          if (sendEmail.messageId) {
             res.status(404).json({
               error:
                 "Your Account is not verified. Check your email we have sent you a verification email again",
@@ -292,7 +300,7 @@ let loginUsers = async (req, res) => {
           } else {
             res.status(404).json({
               error:
-                "Your Account is not verified. Check your email we have sent you a verification email",
+                "Your Account is not verified.",
             });
           }
         }
@@ -344,8 +352,8 @@ let placeOrder = async (req, res) => {
       await order.save();
       let transporter = sendAuthenticationEMail();
       let subject = "Order Confirmation";
-      let url = `<p>Thanks For placing order. You order will deliver to your shipping address. You can track your order here<a href='http://localhost:3000/user/orders'>http://localhost:3000/user/orders</a></p>`;
-      let options = mailOptions(order.userEmail, subject, url);
+      let body = `<p>Thanks For placing order. You order will deliver to your shipping address. You can track your order here<a href='http://localhost:3000/user/orders'>http://localhost:3000/user/orders</a></p>`;
+      let options = mailOptions(order.userEmail, subject, body);
       let sendEmail = await transporter.sendMail(options);
       res.status(200).json({ payment: "successful" });
     } else {
@@ -466,10 +474,14 @@ let fetchOrderDetails = async (req, res) => {
 let updateOrder = async (req, res) => {
   let { _id } = req.params;
   try {
-    let order= await Order.findOne({_id})
-    console.log(order)
-    updatedOrder = await Order.updateOne({ _id }, { $set: {deliveryStatus:req.body.deliveryStatus, deliveryDate:req.body.deliveryDate} });
-    console.log(updatedOrder);
+    let order = await Order.findOne({ _id });
+    updatedOrder = await Order.updateOne(
+      { _id },
+      {
+        $set: req.body,
+      }
+    );
+
     if (updatedOrder) {
       res.status(200).json({ message: "order is updated successfully" });
     } else {
@@ -481,6 +493,59 @@ let updateOrder = async (req, res) => {
     res.status(404).json({ error: error.message });
   }
 };
+let sendOtpToUser = async (req, res) => {
+  try {
+    let { email } = req.params;
+    let user = await User.findOne({ email });
+    if (user) {
+      let transporter = sendAuthenticationEMail();
+      let subject = "Update User Email";
+      let body = `<p>Thank you for requesting to update your email address. Please use the following OTP to verify your request:</p>
+  <h2 style="background-color: #f1f1f1; display: inline-block; padding: 10px; font-size: 24px;">${user.otp}</h2>
+  <p>If you did not make this request, please disregard this email.</p>`;
+      let options = mailOptions(email, subject, body);
+      let sendEmail = await transporter.sendMail(options);
+      if (sendEmail.messageId) {
+        res.status(200).json({ message: "Email sent successfully" });
+      } else {
+        res.status(404).json({ error: "Error sending email" });
+      }
+    } else {
+      res.status(404).json({ error: "User not found" });
+    }
+  } catch (error) {
+    res.status(404).json({ error: error.message });
+  }
+};
+let forgotPasswordVerifyEmail = async (req, res) => {
+  try {
+    let { email } = req.body
+    let user = await User.findOne({ email })
+    if (user) {
+      res.status(200).json({ otp: user.otp })
+    }
+    else {
+      res.status(404).json({ error: "The EnteredEmail doesn't exists" })
+    }
+  } catch (error) {
+    res.status(404).json({ error: erorr.message })
+  }
+}
+let forgotPasswordUpdatePassword = async (req, res) => {
+  try {
+    let { email } = req.params
+
+    let { password } = req.body
+
+    let hashPassword = await bcrypt.hash(password, 10)
+    let updateUser = await User.updateOne({ email }, { $set: { password: hashPassword } })
+
+    res.status(200).json({ message: "password updated" })
+  } catch (error) {
+
+    res.status(404).json({ error: error.message })
+  }
+}
 module.exports = {
   fetchAllUsers,
   addProductsCategory,
@@ -513,4 +578,7 @@ module.exports = {
   fetchLastMonthOrders,
   fetchOrderDetails,
   updateOrder,
+  sendOtpToUser,
+  forgotPasswordVerifyEmail,
+  forgotPasswordUpdatePassword,
 };

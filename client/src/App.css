@@ -376,13 +376,13 @@ footer {
 /* top rated products new collections products */
 .top-rated,
 .new-collections {
-  padding: 2rem 1rem;
+  padding: 1rem 1rem;
 }
 
 .top-rated h2,
 .new-collections h2 {
   margin-bottom: 1.5rem;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 500;
   color: #702670;
   /* text-align: center; */
@@ -417,7 +417,7 @@ footer {
   background-color: #fff;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
-  transition: transform 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
 
 .top-rated-product:hover,
@@ -449,9 +449,12 @@ footer {
 
 /* login form sign up form styles */
 /* update use email */
+/* forgot password */
 
 .login-user,
-.user-update-email {
+.user-update-email,
+.forgot-password-container,
+.signup-user {
   margin: 2rem 0rem;
   display: flex;
   justify-content: center;
@@ -460,20 +463,27 @@ footer {
 }
 
 .login-user-form,
-.user-update-email-form {
+.user-update-email-form,
+.forgot-password,
+.signup-user-form {
   padding: 2rem 1rem;
   width: 100%;
   max-width: 600px;
 }
 
-.login-user-form h1,
-.user-update-email-form h2 {
+.login-user-form h2,
+.user-update-email-form h2,
+.forgot-password h2,
+.signup-user-form h2 {
   text-align: center;
 }
 
 .login-user-btn,
+.signup-user-btn,
 .user-update-email-form button,
-.login-btn {
+.forgot-password button,
+.login-btn,
+.signup-user-btn {
   display: block;
   text-align: center;
   text-decoration: none;
@@ -489,70 +499,25 @@ footer {
 
 .login-user-btn,
 .login-btn:hover,
+.signup-user-btn,
 .user-update-email-form button:hover {
   color: white;
 }
-
-.signup-user-btn {
-  display: block;
-  width: 100%;
-  text-align: center;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  border: 1px solid #3498db;
-  padding: 8px 25px;
-  font-size: 1rem;
-  background: transparent;
-  text-decoration: none;
-}
-
-.signup-user-btn:hover {
-  color: white;
-  background-color: #3498db;
-}
-
-.login-user-form label {
-  margin: 0.5rem 0rem;
-}
-
-.login-user-form p {
-  text-align: center;
-  color: #878787;
-}
-
-/* signup user styling */
-.signup-user {
-  margin: 1.5rem 0.3rem;
-  display: flex;
-  justify-content: center;
-  overflow-x: hidden;
-  width: 100%;
-}
-
-.signup-user-form {
-  padding: 1.5rem 0.2rem;
-  width: 100%;
-  max-width: 600px;
-}
-
-.signup-user-form h1 {
-  text-align: center;
-}
-
+.login-user-form label,
 .signup-user-form label {
   margin: 0.5rem 0rem;
 }
 
+.login-user-form p,
 .signup-user-form p {
   text-align: center;
   color: #878787;
 }
-
-/* error message */
-/* .error-message{
-  color:  rgb(212, 33, 33);
-  font-weight: bold;
-} */
+.login-user .forgot-password-btn {
+  text-decoration: none;
+  color: #878787;
+  font-weight: 600;
+}
 
 /* user profile */
 .login-user-profile {
@@ -709,6 +674,31 @@ footer {
   margin: 0;
   padding: 0;
 }
+.checkout-details {
+  margin-top: 1rem;
+}
+
+.checkout-details h4 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.checkout-details ul {
+  list-style: disc;
+  margin-left: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.checkout-details li {
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+}
+
+.details-disclaimer {
+  font-size: 0.7rem;
+  margin-top: 0.5rem;
+  color: gray;
+}
 /* update user email */
 .update-user-email {
   /* text-decoration: none; */
@@ -770,25 +760,25 @@ footer {
 .user-orders::-webkit-scrollbar {
   display: none;
 }
-.orders-list {
+.user-orders-list {
   flex: 1;
 }
-.orders-list h2 {
+.user-orders-list h2 {
   text-align: center;
   font-size: 24px;
   margin-bottom: 1rem;
 }
-.orders-list h3 {
+.user-orders-list h3 {
   font-size: 18px;
 }
-.orders-list .order {
+.user-orders-list .order {
   font-size: 16px;
 }
-.orders-list .order img {
+.user-orders-list .order img {
   height: 50px;
   object-fit: contain;
 }
-.orders-list .order span {
+.user-orders-list .order span {
   margin-left: 0.3rem;
 }
 /* search filter styles */
@@ -876,4 +866,74 @@ footer {
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+}
+/* contact from styles */
+.contact-form input,
+.contact-form textarea {
+  border-radius: 0;
+  border-color: #ccc;
+}
+.contact-form button {
+  margin: 1rem 0rem;
+  display: block;
+  width: 100%;
+}
+.contact-social-media h2 {
+  margin: 1rem 0;
+}
+.contact-info {
+  margin-top: 1rem;
+}
+.contact-info .social-media {
+  display: flex;
+  justify-content: start;
+  margin: 20px 0px;
+  color: black;
+}
+.contact-info .social-media a {
+  text-decoration: none;
+  padding-right: 20px;
+  font-size: 20px;
+  color: black;
+}
+.contact-info .social-media a i {
+  border: 1px solid black;
+  padding: 5px 8px;
+}
+.contact-info .social-media a i:hover {
+  color: black;
+}
+/* 404 page styles */
+.not-found-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+  background-color: #f8f8f8;
+}
+
+.not-found-title {
+  font-size: 5rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.not-found-text {
+  font-size: 2rem;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.not-found-link {
+  font-size: 1.5rem;
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
+}
+
+.not-found-link:hover {
+  color: #0056b3;
 }

@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ProductsContext } from "../store/Store";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
+import Error from "./Error";
 const ShippingAddress = () => {
-    let navigate= useNavigate()
-    let {shippingAddress,dispatch, user}=useContext(ProductsContext)
+  let navigate = useNavigate();
+  let { shippingAddress, dispatch, user, error } = useContext(ProductsContext);
   let [shippingDetails, setShippingDetails] = useState({
     email: "",
     phone: "",
@@ -17,24 +18,31 @@ const ShippingAddress = () => {
     });
   };
   let shippingDetailsVerify = (e) => {
-    e.preventDefault()
-    dispatch({type:"SET_SHIPPING_DETAILS", payload:{shippingDetails}})
-    navigate('/checkout/confirm-shipping')
+    e.preventDefault();
+    const regex =
+      /^(03\d{2}|04\d{2}|05\d{2}|06\d{2}|07\d{2}|08\d{2}|09\d{2})\d{7}$/;
+    if (!regex.test(shippingDetails.phone)) {
+      dispatch({
+        type: "SET_ERROR",
+        payload: { error: "Please Enter Valid Phone Number" },
+      });
+    } else {
+      dispatch({ type: "SET_SHIPPING_DETAILS", payload: { shippingDetails } });
+      navigate("/checkout/confirm-shipping");
+    }
   };
-  useEffect(()=>{
-    if(shippingAddress){
-        setShippingDetails({...shippingAddress})
+  useEffect(() => {
+    if (shippingAddress) {
+      setShippingDetails({ ...shippingAddress });
     }
-    if(!user){
-      navigate('/checkout/accounts/login')
-    }
-  },[user, shippingAddress])
+  }, [user, shippingAddress]);
   return (
     <div className="container">
       <div className="shipping-details">
         <div className="shipping-address">
           <h2>Shipping Details</h2>
           <form onSubmit={shippingDetailsVerify}>
+            {error && <Error error={error} />}
             <div className="form-group">
               <label htmlFor="shipping-details">Email Address</label>
               <input
@@ -48,13 +56,14 @@ const ShippingAddress = () => {
                 onChange={shippingChangeHandler}
               />
               <div className="form-group">
-                <label htmlFor="shipping-phone">Contact Number (03000000000)</label>
+                <label htmlFor="shipping-phone">
+                  Contact Number (+92-3XX-XXXXXXX)
+                </label>
                 <input
                   type="tel"
                   className="form-control"
-                  pattern="[0-9]{11}"
                   id="shipping-phone"
-                  placeholder="03000000000"
+                  placeholder="+92-3XX-XXXXXXX"
                   name="phone"
                   required
                   value={shippingDetails.phone}

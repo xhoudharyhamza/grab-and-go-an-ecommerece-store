@@ -27,6 +27,10 @@ import VerifyAccount from "../components/VerifyAccount";
 import AdminUpdateUser from "../admin/AdminUpdateUser";
 import SearchResults from "../components/SearchResults";
 import AdminUpdateOrder from "../admin/AdminUpdateOrder";
+import Contact from "../components/Contact";
+import AdminContactMessages from "../admin/AdminContactMessages";
+import ForgotPassword from "../components/ForgotPassword";
+import NotFoundPage from "../components/NotFoundPage";
 const Routes = () => {
   return (
     <>
@@ -34,6 +38,7 @@ const Routes = () => {
         <Route exact path="/" element={<Home />} />
         <Route exact path="/products" element={<Products />} />
         <Route exact path="/cart" element={<Cart />} />
+        <Route exact path="/contact" element={<Contact />} />
         <Route exact path="/accounts/login" element={<Login />} />
         <Route exact path="/accounts/signup" element={<SignUp />} />
         <Route path="/search" element={<SearchResults />} />
@@ -43,6 +48,7 @@ const Routes = () => {
           element={<VerifyAccount />}
         />
         <Route exact path="/accounts/update-email" element={<UpdateEmail />} />
+        <Route exact path="/accounts/forgotpassword" element={<ForgotPassword />} />
         <Route
           exact
           path="/products/:slug"
@@ -101,7 +107,9 @@ const Routes = () => {
             path="accounts/users/:email"
             element={<AdminUpdateUser />}
           />
+          <Route exact path="contact" element={<AdminContactMessages />} />
         </Route>
+        <Route path="*" element={<NotFoundPage/>}/>
       </Router>
     </>
   );

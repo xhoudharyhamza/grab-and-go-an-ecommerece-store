@@ -29,7 +29,11 @@ let userSchema = new mongoose.Schema({
   token:{
     type:String,
     required:true,
-  }
+  },
+  otp:{
+    type:Number,
+    required:true,
+  },
 });
 let User = mongoose.model("User", userSchema);
 module.exports = User;

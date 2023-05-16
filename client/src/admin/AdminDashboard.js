@@ -21,8 +21,8 @@ const AdminDashboard = () => {
     nullErrors(dispatch)
   },[])
   return (
-    <div className="admin-dashboard main-div">
-      <div className="admin-dashboard-components center-div container">
+    <div className="admin-dashboard ">
+      <div className="admin-dashboard-components  container">
       <AdminMenu />
       <Outlet />
       </div>

@@ -107,6 +107,9 @@ let categoryProductsFilter = (products, dispatch, filterCategories) => {
     payload: { products: filteredProducts },
   });
 };
+let loadingFalse=(dispatch)=>{
+  dispatch({ type: "DATA_LOADING", payload: { loading: false } });
+}
 export {
   maxProductPrice,
   minProductPrice,
@@ -120,4 +123,5 @@ export {
   fetchAllUsers,
   nullErrors,
   categoryProductsFilter,
+  loadingFalse,
 };

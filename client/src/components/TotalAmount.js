@@ -12,12 +12,20 @@ const TotalAmount = () => {
   }, [cart]);
   return (
     <div className="total-amount">
-      <h6>Items: ({totalItems})</h6>
-      <h3>Total: ${totalAmount}</h3>
-      <Link className="btn btn-primary checkout-btn" to="/checkout">
-       CheckOut
-      </Link>
+    <h6>Items: ({totalItems})</h6>
+    <h3>Total: ${totalAmount}</h3>
+    <div className="checkout-details">
+      <h4>Checkout Details:</h4>
+      <ul>
+        <li>Free shipping for orders</li>
+        <li>Delivery within 2-3 business days</li>
+        <li>Easy returns within some days</li>
+      </ul>
     </div>
+    <Link className="btn btn-primary checkout-btn" to="/checkout">
+      Proceed to Checkout
+    </Link>
+  </div>
   );
 };
 

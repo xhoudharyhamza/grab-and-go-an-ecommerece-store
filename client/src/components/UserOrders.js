@@ -20,7 +20,7 @@ const UserOrders = () => {
       ) : (
         <div className="container">
           <div className="user-orders">
-            <div className="orders-list">
+            <div className="user-orders-list">
               <h2>Orders List</h2>
               {userOrders.length > 0 ? (
                 userOrders.map((order, index) => {

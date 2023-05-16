@@ -12,7 +12,7 @@ const CheckOut = () => {
     } else {
       navigate("accounts/login");
     }
-  }, [user,cart]);
+  }, [user, cart]);
   return (
     <>
       <div className="container">

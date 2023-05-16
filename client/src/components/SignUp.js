@@ -1,8 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Error from "./Error";
 import { ProductsContext } from "../store/Store";
-import { nullErrors } from "../utils/utils";
+import { loadingFalse, nullErrors } from "../utils/utils";
+import { useNavigate } from "react-router-dom";
 const SignUp = () => {
   let { dispatch, error, loading } = useContext(ProductsContext);
   let [signUpUser, setSignUpUser] = useState({ fname: "", lname: "", email: "", password: "", });
@@ -14,12 +15,13 @@ const SignUp = () => {
   let registerUser = async (e) => {
     e.preventDefault();
     let { fname, lname, email, password } = signUpUser;
-    let regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    let passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9a-z]).{8,16}$/;
-    if (regex.test(email)) {
-      if (regex.test(passwordRegex)) {
+    let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    let passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*()_\-+=?])[A-Za-z0-9!@#$%^&*()_\-+=?]{8,16}$/;
+    if (emailRegex.test(email)) {
+      if (passwordRegex.test(password)) {
         try {
           dispatch({ type: "DATA_LOADING", payload: { loading: true } });
+          nullErrors(dispatch)
           let res = await fetch("/accounts/signup", {
             method: "POST",
             headers: {
@@ -27,12 +29,14 @@ const SignUp = () => {
             },
             body: JSON.stringify({ fname, lname, email, password }),
           });
+          nullErrors(dispatch)
           let response = await res.json();
           if (res.status === 200) {
             let { message } = response;
-            dispatch({ type: "DATA_LOADING", payload: { loading: false } });
+            loadingFalse(dispatch)
             dispatch({ type: "SET_ERROR", payload: { error: message } });
-            setSignUpUser({fname: "", lname: "", email: "",  password: "",
+            setSignUpUser({
+              fname: "", lname: "", email: "", password: "",
             })
 
           } else {
@@ -41,7 +45,7 @@ const SignUp = () => {
             dispatch({ type: "SET_ERROR", payload: { error } });
           }
         } catch (error) {
-          dispatch({ type: "DATA_LOADING", payload: { loading: false } });
+          loadingFalse(dispatch)
           dispatch({ type: "SET_ERROR", payload: { error } });
         }
       } else {
@@ -62,12 +66,13 @@ const SignUp = () => {
   };
   useEffect(() => {
     nullErrors(dispatch);
+    loadingFalse(dispatch)
   }, []);
   return (
     <div className="container">
       <div className="signup-user">
         <div className="signup-user-form">
-          <h1>SignUP</h1>
+          <h2>SignUP</h2>
           {error && <Error />}
           <form onSubmit={registerUser}>
             <div className="form-group">

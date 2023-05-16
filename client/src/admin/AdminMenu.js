@@ -23,17 +23,18 @@ const AdminMenu = () => {
         style={showAdminMenu ? { display: "block" } : { display: "none" }}
       >
         <ul>
-        <li
-        className="close-admin-menu"
-        onClick={() => {
-          setShowAdminMenu(!showAdminMenu);
-        }}
-      >
-       <i className="fa-solid fa-xmark"></i>
-      </li>
+          <li
+            className="close-admin-menu"
+            onClick={() => {
+              setShowAdminMenu(!showAdminMenu);
+            }}
+          >
+            <i className="fa-solid fa-xmark"></i>
+          </li>
           <li>
             <NavLink
               className="admin-nav-link"
+              activeClassName="active"
               exact
               to=""
             >
@@ -49,7 +50,7 @@ const AdminMenu = () => {
               Products
             </NavLink>
           </li>
-          <li className="has-subnav">
+          <li>
             <NavLink
               className="admin-nav-link"
               to="categories"
@@ -58,13 +59,22 @@ const AdminMenu = () => {
               Categories
             </NavLink>
           </li>
-          <li className="has-subnav">
+          <li>
             <NavLink
               className="admin-nav-link"
               to="accounts/users"
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
               Users
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              className="admin-nav-link"
+              to="contact"
+              style={({ isActive }) => (isActive ? activeStyle : undefined)}
+            >
+              Contact
             </NavLink>
           </li>
           <li className="has-subnav">

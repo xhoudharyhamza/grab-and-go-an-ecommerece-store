@@ -5,9 +5,12 @@ import Loading from "../components/Loading";
 import { Link } from "react-router-dom";
 import { nullErrors } from "../utils/utils";
 import moment from "moment";
+import AdminOrdersMenu from "./AdminOrdersMenu";
 const AdminOrders = () => {
   let { loading, dispatch } = useContext(ProductsContext);
   let [orders, setOrders] = useState([]);
+  const [activeLink, setActiveLink] = useState("all");
+  console.log(orders)
   useEffect(() => {
     fetchAllOrders(setOrders, dispatch);
     nullErrors(dispatch);
@@ -15,6 +18,7 @@ const AdminOrders = () => {
 
   return (
     <div className="">
+      <AdminOrdersMenu setActiveLink={setActiveLink} activeLink={activeLink} />
       <div className="admin-orders main-div">
         <div className="center-div">
           <div className="admin-orders-body">
@@ -38,70 +42,77 @@ const AdminOrders = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {orders.map((order, index) => {
-                      return (
-                        <tr key={index}>
-                          <td>{moment(order.date).format("DD/MM/YYYY")}</td>
-                          <td>{order.transactionId}</td>
-                          <td>
-                            <table className="table">
-                              <thead>
-                                <tr>
-                                  <td>Title</td>
-                                  <td>Image</td>
-                                  <td>Quantity</td>
-                                  <td>Price</td>
-                                  <td>Size</td>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                {order.products.map((product, ind) => {
-                                  return (
-                                    <tr key={ind}>
-                                      <td>{product.title}</td>
-                                      <td>
-                                        <img src={product.image} />
-                                      </td>
-                                      <td>{product.quantity}</td>
-                                      <td>${product.price}</td>
-                                      <td>{product.size}</td>
-                                    </tr>
-                                  );
-                                })}
-                              </tbody>
-                            </table>
-                          </td>
-                          <td>{order.userEmail}</td>
-                          <td>${order.totalAmount}</td>
-                          <td>{order.shippingAddress}</td>
-                          <td>{`${order.email}, ${order.phone}`}</td>
-                          <td>
-                            {order.orderStatus === "pending" ? (
-                              <span className="badge text-bg-primary">
-                                Pending
-                              </span>
-                            ) : order.orderStatus === "delivered" ? (
-                              <span className="badge text-bg-success">
-                                Delivered
-                              </span>
-                            ) : (
-                              <span className="badge text-bg-danger">
-                                Cancel
-                              </span>
-                            )}
-                          </td>
-                          <td>
-                            {moment(order.deliveryDate).format("DD/MM/YYYY")}
-                          </td>
-                          <td>
-                            <Link to={`/admin/dashboard/orders/${order._id}`}>
-                              <i className="fa-solid fa-pen-to-square edit-btn text-primary"></i>
-                            </Link>
-                            {/* <i className="fa-solid fa-trash delete-product-btn text-danger"></i> */}
-                          </td>
-                        </tr>
-                      );
-                    })}
+                    {orders
+                      .filter((order, index) =>
+                        activeLink == "all"
+                          ? true
+                          : order.orderStatus === activeLink
+                      )
+
+                      .map((order, index) => {
+                        return (
+                          <tr key={index}>
+                            <td>{moment(order.date).format("DD/MM/YYYY")}</td>
+                            <td>{order.transactionId}</td>
+                            <td>
+                              <table className="table">
+                                <thead>
+                                  <tr>
+                                    <td>Title</td>
+                                    <td>Image</td>
+                                    <td>Quantity</td>
+                                    <td>Price</td>
+                                    <td>Size</td>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {order.products.map((product, ind) => {
+                                    return (
+                                      <tr key={ind}>
+                                        <td>{product.title}</td>
+                                        <td>
+                                          <img src={product.image} />
+                                        </td>
+                                        <td>{product.quantity}</td>
+                                        <td>${product.price}</td>
+                                        <td>{product.size}</td>
+                                      </tr>
+                                    );
+                                  })}
+                                </tbody>
+                              </table>
+                            </td>
+                            <td>{order.userEmail}</td>
+                            <td>${order.totalAmount}</td>
+                            <td>{order.shippingAddress}</td>
+                            <td>{`${order.email}, ${order.phone}`}</td>
+                            <td>
+                              {order.orderStatus === "pending" ? (
+                                <span className="badge text-bg-primary">
+                                  Pending
+                                </span>
+                              ) : order.orderStatus === "delivered" ? (
+                                <span className="badge text-bg-success">
+                                  Delivered
+                                </span>
+                              ) : (
+                                <span className="badge text-bg-danger">
+                                  Cancel
+                                </span>
+                              )}
+                            </td>
+                            <td>
+                              {moment(order.deliveryDate).format("DD/MM/YYYY")}
+                            </td>
+                            <td>
+                              <Link to={`/admin/dashboard/orders/${order._id}`}>
+                                <i className="fa-solid fa-pen-to-square edit-btn text-primary"></i>
+                              </Link>
+                              {/* <i className="fa-solid fa-trash delete-product-btn text-danger"></i> */}
+                            </td>
+                          </tr>
+                        );
+                      })}
                   </tbody>
                 </table>
               </>

@@ -38,6 +38,11 @@
   color: white;
   text-align: center;
 }
+.admin-nav-link.active {
+  background-color: #FF0000;
+  border-radius: 5px;
+}
+
 .admin-menu {
   /* border-right: 1px solid #e5e5e5; */
   /* display: flex; 
@@ -221,4 +226,30 @@ i {
 .last-month-order h3 {
   font-size: 1rem;
   margin-bottom: 1rem;
+}
+/* orders menu */
+.orders-container {
+  width: 100%;
+}
+
+.orders-list {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  border-bottom: 1px solid #ccc;
+}
+
+.orders-list-item {
+  cursor: pointer;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.orders-list-item.active {
+  border-bottom: 2px solid #333;
 }
