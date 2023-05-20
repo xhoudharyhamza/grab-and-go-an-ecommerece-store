@@ -10,11 +10,13 @@ let routes = require("./routes/routes");
 let productRoutes = require("./routes/productsRoutes");
 let categoriesRoutes = require("./routes/categoriesRoutes");
 let userAccountRoutes = require("./routes/userAccountRoutes");
-let contactRoutes=require('./routes/contactRoutes')
+let contactRoutes = require('./routes/contactRoutes')
+let ratingRoutes = require('./routes/ratingRoutes')
 app.use(productRoutes);
 app.use(categoriesRoutes);
 app.use(userAccountRoutes);
 app.use(contactRoutes)
+app.use(ratingRoutes)
 app.use(routes);
 //create server 
 let port = process.env.Port;

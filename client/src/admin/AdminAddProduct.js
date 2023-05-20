@@ -142,12 +142,12 @@ const AdminAddProduct = () => {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="add-product-total-products">Products Count</label>
+              <label htmlFor="add-product-product-rating-count">Product Ratings Count</label>
               <input
                 type="number"
-                className="form-control add-product-total-products"
-                id="add-product-total-products"
-                placeholder="Products Total Count"
+                className="form-control add-product-product-rating-count"
+                id="add-product-product-rating-count"
+                placeholder="Products Ratings Count"
                 required
                 name="count"
                 onChange={changeEvent}

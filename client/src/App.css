@@ -937,3 +937,72 @@ footer {
 .not-found-link:hover {
   color: #0056b3;
 }
+/* style rating component to give ratings */
+.rating-component {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  max-width: 500px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.rating-component h3 {
+  margin-bottom: 10px;
+}
+
+.rating-component p {
+  margin-bottom: 20px;
+}
+
+.rating-component div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.rating-component span {
+  cursor: pointer;
+  color: gray;
+  font-size: 20px;
+  margin-right: 5px;
+}
+
+.rating-component span:last-child {
+  margin-right: 0;
+}
+
+.rating-component span i:hover,
+.rating-component span i:hover ~ span,
+.rating-component span i:hover:last-child {
+  color: yellow;
+}
+
+.rating-component .button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.rating-component button {
+  margin-left: 10px;
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.rating-component .cancel-button {
+  background-color: #ccc;
+  color: #fff;
+}
+
+.rating-component .submit-button {
+  background-color: #007bff;
+  color: #fff;
+}

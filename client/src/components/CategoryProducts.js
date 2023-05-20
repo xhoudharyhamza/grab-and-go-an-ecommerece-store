@@ -24,7 +24,7 @@ const CategoryProducts = () => {
         <div className="category-products">
           <div className="container">
             <div className="row">
-              <p>
+              <p className="mt-2">
                 <Link to={"/"}>Home</Link>
                 {`> Category > ${params.category}`}
               </p>

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-
 const AdminMenu = () => {
   let [showAdminMenu, setShowAdminMenu] = useState(false);
   let activeStyle = {
@@ -34,7 +33,6 @@ const AdminMenu = () => {
           <li>
             <NavLink
               className="admin-nav-link"
-              activeClassName="active"
               exact
               to=""
             >
@@ -66,6 +64,15 @@ const AdminMenu = () => {
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
               Users
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              className="admin-nav-link"
+              to="ratings"
+              style={({ isActive }) => (isActive ? activeStyle : undefined)}
+            >
+              Ratings
             </NavLink>
           </li>
           <li>

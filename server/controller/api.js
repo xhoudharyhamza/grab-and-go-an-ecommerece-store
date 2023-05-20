@@ -2,7 +2,6 @@ let User = require("../models/userModel");
 let Category = require("../models/categoryModel");
 let Product = require("../models/productModel");
 let Order = require("../models/ordersModel");
-let UniqueToken = require("../models/tokenModel");
 let { v4: uuidv4 } = require("uuid");
 let stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 let bcrypt = require("bcryptjs");
@@ -286,12 +285,14 @@ let loginUsers = async (req, res) => {
           res.status(200).json({ user });
         } else {
           let unique = await User.findOne({ email });
+          console.log(email)
           let token = unique.token;
           let transporter = sendAuthenticationEMail();
           let subject = "Email Verification";
           let body = `<p>Click to the following link and verify you Email <a href='http://localhost:3000/accounts/verification/${token}'>http://localhost:3000/accounts/verification/${token}</a></p>`;
           let options = mailOptions(email, subject, body);
           let sendEmail = await transporter.sendMail(options);
+          console.log(sendEmail)
           if (sendEmail.messageId) {
             res.status(404).json({
               error:

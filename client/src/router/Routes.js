@@ -31,6 +31,7 @@ import Contact from "../components/Contact";
 import AdminContactMessages from "../admin/AdminContactMessages";
 import ForgotPassword from "../components/ForgotPassword";
 import NotFoundPage from "../components/NotFoundPage";
+import AdminRatings from "../admin/AdminRatings";
 const Routes = () => {
   return (
     <>
@@ -108,8 +109,9 @@ const Routes = () => {
             element={<AdminUpdateUser />}
           />
           <Route exact path="contact" element={<AdminContactMessages />} />
+          <Route exact path="ratings" element={<AdminRatings />} />
         </Route>
-        <Route path="*" element={<NotFoundPage/>}/>
+        <Route path="*" element={<NotFoundPage />} />
       </Router>
     </>
   );

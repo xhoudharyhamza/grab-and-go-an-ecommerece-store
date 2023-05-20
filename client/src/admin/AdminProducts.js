@@ -29,7 +29,7 @@ const AdminProducts = () => {
             </button>
             <AdminFilterProducts />
             {error && <Error error={error} />}
-            <div className="main-di">
+            <div className="main-div">
               <div className="center-div">
             <table className="table">
               <thead>
@@ -40,7 +40,7 @@ const AdminProducts = () => {
                   <th scope="col">Category</th>
                   <th scope="col">Price</th>
                   <th scope="col">Ratings</th>
-                  <th scope="col">Quantity</th>
+                  <th scope="col">Rating Counts</th>
                   <th scope="col">Action</th>
                 </tr>
               </thead>

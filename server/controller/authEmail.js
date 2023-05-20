@@ -10,7 +10,7 @@ let sendAuthenticationEMail = () => {
 };
 let mailOptions = (receiptMail,subject, body) => {
   return {
-    from: "Grab&Go",
+    from: "hamzashraf930@gmail.com",
     to: receiptMail,
     subject: subject,
     html: body,

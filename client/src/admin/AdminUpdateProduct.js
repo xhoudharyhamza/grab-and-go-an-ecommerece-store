@@ -73,10 +73,10 @@ const AdminUpdateProduct = () => {
   useEffect(() => {
     fetchSingleProductAdmin(params.slug, dispatch, setProductDetails);
   }, [params.slug]);
-  
-  useEffect(()=>{
+
+  useEffect(() => {
     nullErrors(dispatch)
-  },[])
+  }, [])
   return (
     <div className="container">
       <div className="update-product">
@@ -95,7 +95,7 @@ const AdminUpdateProduct = () => {
                 name="title"
                 value={productDetails.title}
                 onChange={changeEvent}
-                // value={productDetails.title}
+              // value={productDetails.title}
               />
             </div>
             <div className="form-group">
@@ -180,14 +180,14 @@ const AdminUpdateProduct = () => {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="update-product-total-products">
-                Products Count
+              <label htmlFor="update-product-product-ratings-count">
+                Product Ratings Count
               </label>
               <input
                 type="number"
-                className="form-control update-product-total-products"
-                id="update-product-total-products"
-                placeholder="Products Total Count"
+                className="form-control update-product-product-ratings-count"
+                id="update-product-product-ratings-count"
+                placeholder="Product Ratings Count"
                 required
                 name="count"
                 onChange={changeEvent}
